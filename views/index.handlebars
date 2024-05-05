@@ -42,35 +42,36 @@
   <h1>User Lists</h1>
   <div class="user-container">
     <div class="user-containers">
-
       {{#each users}}
         <div class="details" data-id="{{this.dataValues.id}}">
           <ul class="each-list">
             <li>
               First Name:
-              <b>{{this.dataValues.firstName}}</b></li>
+              <b class="firstName">{{this.dataValues.firstName}}</b>
+            </li>
             <li>
               Last Name:
-              <b>{{this.dataValues.lastName}}</b>
-            </li><li>
+              <b class="lastName">{{this.dataValues.lastName}}</b>
+            </li>
+            <li>
               Email:
-              <b>{{this.dataValues.email}}</b>
+              <b class="email">{{this.dataValues.email}}</b>
             </li>
           </ul>
-          <button
-            class="btn btn-Primary editBtn"
-            data-id="{{this.dataValues.id}}"
-            data-state="{{this.dataValues.updatedAt}}"
-          >Edit
-          </button>
+          <a href="/update/{{this.dataValues.id}}">
+            <button
+              class="btn btn-Primary editBtn"
+              data-id="{{this.dataValues.id}}"
+            >Edit
+            </button>
+          </a>
           <button
             class="btn btn-danger deleteBtn"
             data-id="{{this.dataValues.id}}"
-          >Delete
-          </button>
+          >Delete</button>
         </div>
       {{/each}}
-
     </div>
+
   </div>
 </div>

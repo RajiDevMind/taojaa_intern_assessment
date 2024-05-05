@@ -21,7 +21,22 @@ router.post("/create-user", async (req, res) => {
       lastName,
       email,
     });
-    return res.status(201).json({ newUser });
+    res.render("index.handlebars", { newUser, style: "index" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.get("/update/:id", async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const user = await User.findOne({ where: { id: userId } });
+    if (user) {
+      // Render form with handlebars template engine
+      res.render("editUser.handlebars", { user, style: "index" });
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }

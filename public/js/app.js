@@ -1,3 +1,8 @@
+const scroll = document.scrollTo({
+  top: 410, // Scroll to 100px from the top
+  behavior: "smooth", // Optional: smooth scrolling effect
+});
+
 // adding event to 'add item' btn
 $("button[type=submit]").on("click", (e) => {
   e.preventDefault();
@@ -15,9 +20,11 @@ $("button[type=submit]").on("click", (e) => {
     url: "/create-user",
     method: "POST",
     data: { firstName: firstName, lastName: lastName, email: email }, // Note: key representation of req.body.snack_name in the server
-    success: function (succesful) {
-      if (succesful) {
+    success: function (response) {
+      if (response) {
+        alert("User was Successfully Created");
         location.reload();
+        scroll;
       }
       return;
     },
@@ -25,7 +32,6 @@ $("button[type=submit]").on("click", (e) => {
       alert("Unable to Add Item!");
     },
   });
-  alert("Added Successfully");
 });
 
 // delete user
@@ -46,5 +52,37 @@ $(".user-containers .details .deleteBtn").on("click", (e) => {
       });
   } else {
     alert("Delete Cancelled");
+  }
+});
+
+// update user
+$("button[type=button]").on("click", (e) => {
+  e.preventDefault();
+
+  // Select input fields
+  let firstName = $("input[name='fname']").val();
+  let lastName = $("input[name='lname']").val();
+  let email = $("input[name='email']").val();
+
+  let url = window.location.href; // Getting URL of the current page
+  let match = url.match(/\/update\/(\d+)/); // Regular expression to extract userId from URL
+
+  if (match) {
+    let id = match[1]; // Extracted ID
+    $.ajax({
+      url: "/update/" + id,
+      type: "PUT",
+      data: { firstName: firstName, lastName: lastName, email: email },
+      success: function (response) {
+        alert(response.msg);
+        window.location.assign("/");
+        scroll;
+      },
+      error: function (xhr, status, error) {
+        console.error("Error updating user:", error);
+      },
+    });
+  } else {
+    console.log("ID not found in URL");
   }
 });
