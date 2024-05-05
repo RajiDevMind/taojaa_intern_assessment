@@ -27,8 +27,31 @@ router.post("/create-user", async (req, res) => {
   }
 });
 
-router.put("/update", async (req, res) => {
-  res.json({ message: "Hello world" });
+router.put("/update/:id", async (req, res) => {
+  const id = req.params.id;
+  const { firstName, lastName, email } = req.body;
+
+  try {
+    // Update the user with the provided ID
+    const [affectedRowsCount, affectedRows] = await User.update(
+      { firstName, lastName, email },
+      { where: { id: id } }
+    );
+
+    if (affectedRowsCount > 0) {
+      // If the user was successfully updated
+      res
+        .status(200)
+        .json({ message: "User updated successfully", user: affectedRows });
+    } else {
+      // If no user was found with the provided ID
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    // Handle any errors that occur during the update process
+    console.error("Error updating user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 router.delete("/:id", async (req, res) => {

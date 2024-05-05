@@ -69,18 +69,23 @@ $("button[type=submit]").on("click", (e) => {
 $(".user-container .details .deleteBtn").on("click", (e) => {
   e.preventDefault();
   const id = $(e.target).closest(".details").attr("data-id"); // Retrieve the ID from the clicked button's parent
-  $.ajax({
-    url: `/${id}`,
-    method: "DELETE",
-  })
-    .then((response) => {
-      alert(response.message); // Display success message
-      $(e.target).closest(".user-container").remove(); // Remove the user container from the UI
+  const confirmAtion = confirm("Are you to delete user?");
+  if (confirmAtion) {
+    $.ajax({
+      url: `/${id}`,
+      method: "DELETE",
     })
-    .catch((error) => {
-      console.error("Failed to delete user:", error);
-      alert("Failed to delete user. Please try again."); // Display error message
-    });
+      .then((response) => {
+        alert(response.message); // Display success message
+        $(e.target).closest(".user-container").remove(); // Remove the user container from the UI
+      })
+      .catch((error) => {
+        console.error("Failed to delete user:", error);
+        alert("Failed to delete user. Please try again."); // Display error message
+      });
+  } else {
+    alert("Delete Cancelled");
+  }
 });
 
 // // Update Favorites
