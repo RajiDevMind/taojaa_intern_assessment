@@ -1,0 +1,75 @@
+<div class="container content">
+  <h1>Add User Form</h1>
+  <div class="user-container">
+    <form>
+      <div class="form-group">
+        <div>
+          <label for="fname">First Name</label>
+          <input
+            type="text"
+            placeholder="Enter First Name"
+            class="form-control"
+            name="fname"
+            required
+          />
+        </div>
+        <div>
+          <label for="lname">Last Name</label>
+          <input
+            type="text"
+            placeholder="Enter Last Name"
+            class="form-control"
+            name="lname"
+            required
+          />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            placeholder="yourmail@gmail.com"
+            class="form-control"
+            name="email"
+            required
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success create"> Create </button>
+    </form>
+  </div>
+</div>
+<div class="container content">
+  <h1>User List</h1>
+  <div class="user-container">
+
+    {{!  }}
+    {{#each users}}
+      <div class="details" data-id="{{this.dataValues.id}}">
+        <ul class="each-list">
+          <li>
+            First Name:
+            <b>{{this.dataValues.firstName}}</b></li>
+          <li>
+            Last Name:
+            <b>{{this.dataValues.lastName}}</b>
+          </li><li>
+            Email:
+            <b>{{this.dataValues.email}}</b>
+          </li>
+        </ul>
+        <button
+          class="btn btn-Primary editBtn"
+          data-id="{{id}}"
+          data-state="{{edit}}"
+        >Edit
+        </button>
+        <button
+          class="btn btn-danger deleteBtn"
+          data-id="{{this.dataValues.id}}"
+        >Delete
+        </button>
+      </div>
+    {{/each}}
+
+  </div>
+</div>

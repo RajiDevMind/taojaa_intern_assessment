@@ -1,0 +1,61 @@
+/* Default styles */
+.container {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 20px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+}
+
+h1 {
+  text-align: center;
+}
+li {
+  list-style-type: none;
+  font-size: 1.2em;
+}
+.createBtn {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+ul.each-list {
+  padding-left: 0;
+  margin-bottom: 10px;
+}
+.user-container {
+  margin-top: 20px;
+}
+
+.details {
+  margin-bottom: 10px;
+  border: 2px solid;
+  border-radius: 5px;
+  background-color: #ccc;
+  padding: 10px;
+}
+
+/* Button styles */
+.btn {
+}
+
+.btn-default {
+  background-color: #007bff;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .details {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 14px;
+  }
+}
