@@ -42,14 +42,12 @@ router.put("/update/:id", async (req, res) => {
       // If the user was successfully updated
       res
         .status(200)
-        .json({ message: "User updated successfully", user: affectedRows });
+        .json({ msg: "User updated successfully", user: affectedRows });
     } else {
       // If no user was found with the provided ID
       res.status(404).json({ error: "User not found" });
     }
   } catch (error) {
-    // Handle any errors that occur during the update process
-    console.error("Error updating user:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
