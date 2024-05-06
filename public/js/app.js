@@ -1,5 +1,5 @@
-const scroll = document.scrollTo({
-  top: 410, // Scroll to 100px from the top
+const scroll = window.scrollTo({
+  top: 300, // Scroll to 100px from the top
   behavior: "smooth", // Optional: smooth scrolling effect
 });
 
@@ -35,9 +35,9 @@ $("button[type=submit]").on("click", (e) => {
 });
 
 // delete user
-$(".user-containers .details .deleteBtn").on("click", (e) => {
+$(".user-containers .user-details .delete-btn").on("click", (e) => {
   e.preventDefault();
-  const id = $(e.target).closest(".details").attr("data-id"); // Retrieve the ID from the clicked button's parent
+  const id = $(e.target).closest(".user-details").attr("data-id"); // Retrieve the ID from the clicked button's parent
   const confirmAtion = confirm("Are you to delete user?");
   if (confirmAtion) {
     $.ajax({
@@ -45,7 +45,7 @@ $(".user-containers .details .deleteBtn").on("click", (e) => {
       method: "DELETE",
     })
       .then((response) => {
-        $(`.user-containers .details[data-id=${id}]`).remove(); // Remove the user container from the UI
+        $(`.user-containers .user-details[data-id=${id}]`).remove(); // Remove the user container from the UI
       })
       .catch((error) => {
         alert("Failed to delete user. Please try again."); // Display error message
@@ -63,6 +63,10 @@ $("button[type=button]").on("click", (e) => {
   let firstName = $("input[name='fname']").val();
   let lastName = $("input[name='lname']").val();
   let email = $("input[name='email']").val();
+
+  if (!firstName || !lastName || !email) {
+    return alert("Empty input are not allowed!");
+  }
 
   let url = window.location.href; // Getting URL of the current page
   let match = url.match(/\/update\/(\d+)/); // Regular expression to extract userId from URL
